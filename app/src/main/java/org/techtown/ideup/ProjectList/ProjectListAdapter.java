@@ -10,12 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.ideup.R;
+import org.techtown.ideup.retrofit.dto.ProjectDto;
 
 import java.util.ArrayList;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
  onProjectClickListener listener;
- ArrayList<Project> projects = new ArrayList<>();
+ ArrayList<ProjectDto> projects = new ArrayList<>();
 
     @NonNull
     @Override
@@ -27,10 +28,8 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ProjectListAdapter.ViewHolder holder, int position) {
-        Project project = projects.get(position);
+        ProjectDto project = projects.get(position);
         holder.setTextView(project);
-//        ChallengeItem item = items.get(position);
-//        holder.setItem(item);
     }
 
     @Override
@@ -38,20 +37,20 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         return projects.size();
     }
 
-    public void addItem(Project project){
+    public void addItem(ProjectDto project){
         projects.add(project);
     }
 
-    public void setItems(ArrayList<Project> projects){ //ArrayList전체를 설정할 수 있는 함수
+    public void setItems(ArrayList<ProjectDto> projects){ //ArrayList전체를 설정할 수 있는 함수
         this.projects = projects;
     }
 
 
-    public Project getItem(int position){
+    public ProjectDto getItem(int position){
         return projects.get(position);
     }
 
-    public void setProject(int position, Project project){
+    public void setProject(int position, ProjectDto project){
         projects.set(position, project);
     }
 
@@ -78,7 +77,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
             });
 
         }
-        public void setTextView(Project project){
+        public void setTextView(ProjectDto project){
             teamName.setText(project.getTeamName());
             projectName.setText(project.getProjectName());
         }

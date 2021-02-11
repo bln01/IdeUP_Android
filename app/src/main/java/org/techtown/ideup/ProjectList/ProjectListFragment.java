@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,8 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.ideup.R;
+import org.techtown.ideup.retrofit.dto.ProjectDto;
+import org.techtown.ideup.retrofit.serviceImpl.ProjectServiceImpl;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ProjectListFragment extends Fragment {
+
+    private final ProjectServiceImpl projectService;
+
+    public ProjectListFragment(ProjectServiceImpl projectService) {
+        this.projectService = projectService;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -23,12 +34,19 @@ public class ProjectListFragment extends Fragment {
         RecyclerView recyclerView = rootView.findViewById(R.id.projectListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        ProjectListAdapter adapter = new ProjectListAdapter();
-        adapter.addItem(new Project("창업팀1", "프로젝트1", "프로젝트 내용"));
-        adapter.addItem(new Project("창업팀2", "프로젝트2", "프로젝트 내용"));
-        adapter.addItem(new Project("창업팀3", "프로젝트3", "프로젝트 내용"));
-        adapter.addItem(new Project("창업팀4", "프로젝트4", "프로젝트 내용"));
+        ArrayList<ProjectDto> projectList = new ArrayList<>();
+        try {
+            projectList = projectService.getProjectList();
+            System.out.println(projectList.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        ProjectListAdapter adapter = new ProjectListAdapter();
+
+        for(ProjectDto project : projectList){
+            adapter.addItem(project);
+        }
         recyclerView.setAdapter(adapter);
 
         return rootView;

@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,19 +12,22 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.techtown.ideup.InfoTeam.MyTeamFragment;
-import org.techtown.ideup.InfoTeam.infoTeamActivity;
 import org.techtown.ideup.ListTeam.ListTeamFragment;
 import org.techtown.ideup.ProjectList.ProjectListFragment;
 import org.techtown.ideup.TeamComplain.TeamComplainFragment;
 import org.techtown.ideup.UserComplain.UserComplainFragment;
 import org.techtown.ideup.UserComplain.UserComplainRegisterFragment;
+import org.techtown.ideup.retrofit.serviceImpl.ProjectServiceImpl;
 
 public class MainActivity extends AppCompatActivity {
+
+    ProjectServiceImpl projectService = new ProjectServiceImpl();
+
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private UserComplainFragment userComplainFragment = new UserComplainFragment();
     private TeamComplainFragment teamComplainFragment = new TeamComplainFragment();
     private UserComplainRegisterFragment userComplainRegisterFragment = new UserComplainRegisterFragment();
-    private ProjectListFragment projectListFragment = new ProjectListFragment();
+    private ProjectListFragment projectListFragment = new ProjectListFragment(projectService);
     private ListTeamFragment listTeamFragment = new ListTeamFragment();
     private MyTeamFragment myTeamFragment = new MyTeamFragment();
 
