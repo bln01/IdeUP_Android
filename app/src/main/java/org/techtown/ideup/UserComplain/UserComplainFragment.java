@@ -14,9 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.ideup.MainActivity;
 import org.techtown.ideup.R;
+import org.techtown.ideup.retrofit.dto.ComplainDto;
+import org.techtown.ideup.retrofit.serviceImpl.ComplainServiceImpl;
+import org.techtown.ideup.retrofit.serviceImpl.ProjectServiceImpl;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserComplainFragment extends Fragment {
     //MainActivity activity = (MainActivity)getActivity();
+    private final ComplainServiceImpl complainService;
+
+    public UserComplainFragment(ComplainServiceImpl complainService) {
+        this.complainService = complainService;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,12 +45,24 @@ public class UserComplainFragment extends Fragment {
         RecyclerView recyclerView = rootView.findViewById(R.id.userComplainRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         // vertical linearLayout 설정
+
+        ArrayList<ComplainDto> complainList = new ArrayList<>();
+        try {
+            complainList = complainService.getComplainList();
+            System.out.println(complainList.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         UserComplainAdapter adapter = new UserComplainAdapter();
-        adapter.addItem(new UserComplain("불편1"));
-        adapter.addItem(new UserComplain("불편2"));
-        adapter.addItem(new UserComplain("불편3"));
-        adapter.addItem(new UserComplain("불편4"));
-        adapter.addItem(new UserComplain("불편5"));
+
+        for(ComplainDto complainDto : complainList){
+            adapter.addItem(new UserComplain(complainDto.getComplainContent()));
+        }
+//        adapter.addItem(new UserComplain("불편2"));
+//        adapter.addItem(new UserComplain("불편3"));
+//        adapter.addItem(new UserComplain("불편4"));
+//        adapter.addItem(new UserComplain("불편5"));
 
         recyclerView.setAdapter(adapter);
 
