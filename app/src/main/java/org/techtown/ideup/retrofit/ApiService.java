@@ -2,6 +2,7 @@ package org.techtown.ideup.retrofit;
 
 import org.techtown.ideup.retrofit.dto.ComplainDto;
 import org.techtown.ideup.retrofit.dto.ProjectDto;
+import org.techtown.ideup.retrofit.dto.TeamDto;
 
 import java.util.ArrayList;
 
@@ -17,5 +18,8 @@ public interface ApiService {
 
     @GET("/complains")
     Call<ArrayList<ComplainDto>> getComplainList(); // 불편글 리스트 받아오기
+
+    @GET("/teams")
+    Call<ArrayList<TeamDto>> getTeamList(); // 창업팀 리스트 받아오기
 
 }
