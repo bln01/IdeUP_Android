@@ -1,5 +1,6 @@
 package org.techtown.ideup.ProjectList;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.ideup.R;
+import org.techtown.ideup.retrofit.ApiService;
+import org.techtown.ideup.retrofit.RetrofitClient;
 import org.techtown.ideup.retrofit.dto.ProjectDto;
 
 import java.util.ArrayList;
@@ -64,11 +67,16 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         private TextView projectName;
         private Button sendBT;
         private Button detailBT;
+
+
+
         public ViewHolder(final View itemView, final onProjectClickListener listener) {
             super(itemView);
 
+            sendBT = itemView.findViewById(R.id.likeBT);
             teamName = itemView.findViewById(R.id.teamName);
             projectName = itemView.findViewById(R.id.projectName);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -76,11 +84,21 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
                 }
             });
 
+
         }
         public void setTextView(ProjectDto project){
             teamName.setText(project.getTeamName());
             projectName.setText(project.getProjectName());
         }
+//
+//        public void setItem(final ProjectDto project){
+//            sendBT.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    RetrofitClient.getApiService().postLike("temporary_token", project.getId());
+//                }
+//            });
+//        }
 
 
     }

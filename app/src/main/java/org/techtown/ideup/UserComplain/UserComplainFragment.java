@@ -54,10 +54,10 @@ public class UserComplainFragment extends Fragment {
             e.printStackTrace();
         }
 
-        UserComplainAdapter adapter = new UserComplainAdapter();
+        UserComplainAdapter adapter = new UserComplainAdapter(complainService);
 
         for(ComplainDto complainDto : complainList){
-            adapter.addItem(new UserComplain(complainDto.getComplainContent()));
+            adapter.addItem(complainDto);
         }
 //        adapter.addItem(new UserComplain("불편2"));
 //        adapter.addItem(new UserComplain("불편3"));
