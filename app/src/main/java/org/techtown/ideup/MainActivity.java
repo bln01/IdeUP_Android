@@ -17,18 +17,22 @@ import org.techtown.ideup.ProjectList.ProjectListFragment;
 import org.techtown.ideup.TeamComplain.TeamComplainFragment;
 import org.techtown.ideup.UserComplain.UserComplainFragment;
 import org.techtown.ideup.UserComplain.UserComplainRegisterFragment;
+import org.techtown.ideup.retrofit.serviceImpl.ComplainServiceImpl;
 import org.techtown.ideup.retrofit.serviceImpl.ProjectServiceImpl;
+import org.techtown.ideup.retrofit.serviceImpl.TeamServiceImpl;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProjectServiceImpl projectService = new ProjectServiceImpl();
+    private ProjectServiceImpl projectService = new ProjectServiceImpl();
+    private TeamServiceImpl teamService = new TeamServiceImpl();
+    private ComplainServiceImpl complainService = new ComplainServiceImpl();
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private UserComplainFragment userComplainFragment = new UserComplainFragment();
+    private UserComplainFragment userComplainFragment = new UserComplainFragment(complainService);
     private TeamComplainFragment teamComplainFragment = new TeamComplainFragment();
     private UserComplainRegisterFragment userComplainRegisterFragment = new UserComplainRegisterFragment();
     private ProjectListFragment projectListFragment = new ProjectListFragment(projectService);
-    private ListTeamFragment listTeamFragment = new ListTeamFragment();
+    private ListTeamFragment listTeamFragment = new ListTeamFragment(teamService);
     private MyTeamFragment myTeamFragment = new MyTeamFragment();
 
 //    private org.techtown.ideup.InfoTeam.infoTeamActivity infoTeamActivity = new infoTeamActivity();

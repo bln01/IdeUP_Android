@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,22 +15,22 @@ import org.techtown.ideup.R;
 
 import java.util.ArrayList;
 
-public class teamAdapter extends RecyclerView.Adapter<teamAdapter.ViewHolder> implements OnTeamItemClickListener{
-    ArrayList<team> items = new ArrayList<team>();
+public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> implements OnTeamItemClickListener{
+    ArrayList<Team> items = new ArrayList<Team>();
     OnTeamItemClickListener listener;
 
     @NonNull
     @Override
-    public teamAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TeamAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.team_item, parent, false);
 
-        return new teamAdapter.ViewHolder(itemView);
+        return new TeamAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull teamAdapter.ViewHolder holder, int position) {
-        team item = items.get(position);
+    public void onBindViewHolder(@NonNull TeamAdapter.ViewHolder holder, int position) {
+        Team item = items.get(position);
         holder.setItem(item);
     }
 
@@ -39,14 +38,14 @@ public class teamAdapter extends RecyclerView.Adapter<teamAdapter.ViewHolder> im
     public int getItemCount() {
         return items.size();
     }
-    public void addItem(team item){
+    public void addItem(Team item){
         items.add(item);
     }
-    public void setItems(ArrayList<team> items){
+    public void setItems(ArrayList<Team> items){
         this.items = items;
     }
 
-    public team getItem(int position){
+    public Team getItem(int position){
         return items.get(position);
     }
 
@@ -86,7 +85,7 @@ public class teamAdapter extends RecyclerView.Adapter<teamAdapter.ViewHolder> im
             });
         }
 
-        public void setItem(team item){
+        public void setItem(Team item){
             tname_tV.setText(item.getName());
             tinfo_tV.setText(item.getInfo());
             team_iV.setImageResource(item.getImage());

@@ -1,10 +1,10 @@
 package org.techtown.ideup.ListTeam;
 
-public class team {
+public class Team {
     String name, info;
     int image;
 
-    public team(int image, String name, String info){
+    public Team(int image, String name, String info){
         this.name = name;
         this.info = info;
         this.image = image;
